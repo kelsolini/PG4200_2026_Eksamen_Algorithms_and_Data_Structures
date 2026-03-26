@@ -7,7 +7,6 @@ public class ReadFromFile {
     public static void main(String[] args) {
         ArrayList<Wine> wines = readFile();
 
-        // Test: print første 5
         for (int i = 0; i < 5 && i < wines.size(); i++) {
             System.out.println(wines.get(i));
         }
