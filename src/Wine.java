@@ -11,4 +11,5 @@ public record Wine(double fixedAcidity,
                    double alcohol,
                    int quality,
                    WineType type
+                   /* Could have just used alcohol only */
 ) {}
