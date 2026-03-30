@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Task1_BubbleSort_NonOptimised {
     public static void main(String[] args) {
-        /* Full Array */
+        /* Original Array */
         ArrayList<Wine> wines = ReadFromFile.readFile();
 
         /* Array only with alcoholValues */
@@ -15,14 +16,34 @@ public class Task1_BubbleSort_NonOptimised {
             }
         }
 
-        System.out.println("Before sorting:");
-        System.out.println(alcoholValues);
-        int[] result = bubbleSort(alcoholValues);
-        System.out.println("After sorting:");
-        System.out.println(alcoholValues);
-        System.out.println("Iterations: " + result[0]);
-        System.out.println("Swaps: " + result[1]);
+        System.out.println("=== Bubble Sort (Non-Optimised) ===");
+
+        System.out.println("\n[Natural order]");
+        System.out.println("Before: " + new ArrayList<>(alcoholValues));
+        int[] result1 = bubbleSort(alcoholValues);
+        System.out.println("After:  " + alcoholValues);
+        System.out.println("Passes: " + result1[0]);
+        System.out.println("Swaps:  " + result1[1]);
+
+        Collections.shuffle(alcoholValues);
+
+        System.out.println("\n[Shuffled]");
+        System.out.println("Before: " + new ArrayList<>(alcoholValues));
+        int[] result2 = bubbleSort(alcoholValues);
+        System.out.println("After:  " + alcoholValues);
+        System.out.println("Passes: " + result2[0]);
+        System.out.println("Swaps:  " + result2[1]);
     }
+
+    /**************************************************************************************
+     *   SOURCE FOR BUBBLE SORT
+     *   Title   : Bubble Sort Algorithm
+     *   Author  : GeeksForGeeks
+     *   Date    : January 21, 2025
+     *   URL     : https://www.geeksforgeeks.org/bubble-sort-algorithm/
+     *   Accessed: 2025-04-23
+     *   Note    : Adapted to sort unique alcohol values from the Wine Quality dataset
+     **************************************************************************************/
 
     public static int[] bubbleSort(ArrayList<Double> list) {
         int iteration = 0;
@@ -31,7 +52,7 @@ public class Task1_BubbleSort_NonOptimised {
         // Outer loop - will run exactly n-1 times
         for (int i = 0; i < list.size() - 1; i++) {
             iteration++;
-            // Inner loop - compares and swaps adjacent elements if needed
+            // Inner loop compares and swaps adjacent elements if needed
             for (int j = 0; j < list.size() - 1 - i; j++) {
                 if (list.get(j) > list.get(j + 1)) {
                     double temp = list.get(j);
@@ -41,7 +62,9 @@ public class Task1_BubbleSort_NonOptimised {
                 }
             }
         }
-        // Returns number of passes and swaps for analysis
-        return new int[]{iteration, swap};
+        return new int[]{
+                iteration,
+                swap
+        };
     }
 }

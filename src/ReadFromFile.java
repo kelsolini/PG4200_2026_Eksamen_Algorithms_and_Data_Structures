@@ -4,16 +4,6 @@ import java.util.Scanner;
 
 public class ReadFromFile {
 
-    public static void main(String[] args) {
-        ArrayList<Wine> wines = readFile();
-
-        for (int i = 0; i < 5 && i < wines.size(); i++) {
-            System.out.println(wines.get(i));
-        }
-
-        System.out.println("Antall viner: " + wines.size());
-    }
-
     public static ArrayList<Wine> readFile() {
         String whiteWineFile = "data/wine+quality/winequality-white.csv";
         String redWineFile = "data/wine+quality/winequality-red.csv";
@@ -21,7 +11,6 @@ public class ReadFromFile {
         ArrayList<Wine> wines = new ArrayList<>();
 
         try {
-            // Les begge filer
             readSingleFile(whiteWineFile, wines, WineType.WHITE);
             readSingleFile(redWineFile, wines, WineType.RED);
 
@@ -36,7 +25,6 @@ public class ReadFromFile {
         try {
             Scanner scanner = new Scanner(new File(filePath));
 
-            // Hopp over header (første linje)
             if (scanner.hasNextLine()) {
                 scanner.nextLine();
             }
@@ -44,7 +32,6 @@ public class ReadFromFile {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
 
-                // CSV er separert med ;
                 String[] values = line.split(";");
 
                 Wine wine = new Wine(
@@ -69,7 +56,7 @@ public class ReadFromFile {
             scanner.close();
 
         } catch (Exception e) {
-            System.out.println("Feil ved lesing av fil: " + filePath);
+            System.out.println("Error while reading from file: " + filePath);
             e.printStackTrace();
         }
     }

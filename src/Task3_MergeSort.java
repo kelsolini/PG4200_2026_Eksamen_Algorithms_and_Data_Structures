@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Task3_MergeSort {
     public static void main(String[] args) {
@@ -14,15 +15,24 @@ public class Task3_MergeSort {
                 alcoholValues.add(wine.alcohol());
             }
         }
+
+        System.out.println("=== Merge Sort ===");
+
+        System.out.println("\n[Natural order]");
+        System.out.println("Before: " + new ArrayList<>(alcoholValues));
+        mergeCount = 0;
         mergeSort(alcoholValues);
+        System.out.println("After:  " + alcoholValues);
+        System.out.println("Merges: " + mergeCount);
 
-        System.out.println("Sorted alcohol values:");
-        for (Double value : alcoholValues) {
-            System.out.println(value);
-        }
+        Collections.shuffle(alcoholValues);
 
-        System.out.println("\nTotal merge operations: " + mergeCount);
-
+        System.out.println("\n[Shuffled]");
+        System.out.println("Before: " + new ArrayList<>(alcoholValues));
+        mergeCount = 0;
+        mergeSort(alcoholValues);
+        System.out.println("After:  " + alcoholValues);
+        System.out.println("Merges: " + mergeCount);
     }
 
     /**************************************************************************************

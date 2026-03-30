@@ -16,35 +16,55 @@ public class Task2_InsertionSort {
                 alcoholValues.add(wine.alcohol());
             }
         }
-        /* Calling the insertion sorting function and sending the Array with alcohol values only */
-        insertionSort(alcoholValues);
 
-        System.out.println("Random sorted array ->");
-        randomArrangeArray(alcoholValues);
+        System.out.println("=== Insertion Sort ===");
 
-        System.out.println("Sort sorted array ->");
-        insertionSort(alcoholValues);
+        System.out.println("\n[Natural order]");
+        System.out.println("Before: " + new ArrayList<>(alcoholValues));
+        int[] result1 = insertionSort(alcoholValues);
+        System.out.println("After:  " + alcoholValues);
+        System.out.println("Passes: " + result1[0]);
+        System.out.println("Shifts: " + result1[1]);
+
+        Collections.shuffle(alcoholValues);
+
+        System.out.println("\n[Shuffled]");
+        System.out.println("Before: " + new ArrayList<>(alcoholValues));
+        int[] result2 = insertionSort(alcoholValues);
+        System.out.println("After:  " + alcoholValues);
+        System.out.println("Passes: " + result2[0]);
+        System.out.println("Shifts: " + result2[1]);
     }
 
-    public static void insertionSort(ArrayList<Double> list) {
-        System.out.println("Before sorting: " + list);
+    /**************************************************************************************
+     *   SOURCE FOR INSERTION SORT
+     *   Title   : Insertion Sort Algorithm
+     *   Author  : GeeksForGeeks
+     *   URL     : https://www.geeksforgeeks.org/insertion-sort-algorithm/
+     *   Note    : Adapted to sort unique alcohol values from the Wine Quality dataset
+     **************************************************************************************/
 
+    public static int[] insertionSort(ArrayList<Double> list) {
+        int passes = 0;
+        int shifts = 0;
         int n = list.size();
+
         for (int i = 1; i < n; i++) {
+            passes++;
             double key = list.get(i);
             int j = i - 1;
 
             while (j >= 0 && list.get(j) > key) {
                 list.set(j + 1, list.get(j));
                 j--;
+                shifts++;
             }
             list.set(j + 1, key);
         }
-        System.out.println("After sorting: " + list);
+        return new int[]{
+                passes,
+                shifts
+        };
     }
 
-    public static void randomArrangeArray(ArrayList<Double> list) {
-        Collections.shuffle(list);
-        System.out.println(list);
-    }
 }

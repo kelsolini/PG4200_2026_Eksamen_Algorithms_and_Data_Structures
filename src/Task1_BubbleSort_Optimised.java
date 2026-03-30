@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Task1_BubbleSort_Optimised {
     public static void main(String[] args) {
@@ -15,25 +16,35 @@ public class Task1_BubbleSort_Optimised {
                 alcoholValues.add(wine.alcohol());
             }
         }
-        System.out.println("Before sorting:");
-        System.out.println(new ArrayList<>(alcoholValues));
-        int[] result = bubbleSort(alcoholValues);
-        System.out.println("After sorting:");
-        System.out.println(alcoholValues);
-        System.out.println("Iterations: " + result[0]);
-        System.out.println("Swaps: " + result[1]);
 
+        System.out.println("=== Bubble Sort (Optimised) ===");
+
+        System.out.println("\n[Natural order]");
+        System.out.println("Before: " + new ArrayList<>(alcoholValues));
+        int[] result1 = bubbleSort(alcoholValues);
+        System.out.println("After:  " + alcoholValues);
+        System.out.println("Passes: " + result1[0]);
+        System.out.println("Swaps:  " + result1[1]);
+
+        Collections.shuffle(alcoholValues);
+
+        System.out.println("\n[Shuffled]");
+        System.out.println("Before: " + new ArrayList<>(alcoholValues));
+        int[] result2 = bubbleSort(alcoholValues);
+        System.out.println("After:  " + alcoholValues);
+        System.out.println("Passes: " + result2[0]);
+        System.out.println("Swaps:  " + result2[1]);
     }
 
-     /**
-     SOURCE FOR BUBBLE SORT
-     Title   : Bubble Sort Algorithm
-     Author  : Geeks for Geeks
-     Date    : January 21, 2025
-     URL     : https://www.geeksforgeeks.org/bubble-sort-algorithm/
-     Accessed: 2025-04-23
-     Note    : Adapted to sort unique alcohol values from the data.Wine Quality dataset
-     **/
+    /**************************************************************************************
+     *   SOURCE FOR BUBBLE SORT
+     *   Title   : Bubble Sort Algorithm
+     *   Author  : GeeksForGeeks
+     *   Date    : January 21, 2025
+     *   URL     : https://www.geeksforgeeks.org/bubble-sort-algorithm/
+     *   Accessed: 2025-04-23
+     *   Note    : Adapted to sort unique alcohol values from the Wine Quality dataset
+     **************************************************************************************/
 
     // Optimized: stops early if no swaps occurred in a pass
     public static int[] bubbleSort(ArrayList<Double> list) {
@@ -58,7 +69,9 @@ public class Task1_BubbleSort_Optimised {
             // If no elements were swapped this pass, the list is already sorted
             if (!swapped) break;
         }
-        // Returns number of passes and swaps for analysis
-        return new int[]{iteration, swap};
+        return new int[]{
+                iteration,
+                swap
+        };
     }
 }
