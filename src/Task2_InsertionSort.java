@@ -55,11 +55,15 @@ public class Task2_InsertionSort {
             double key = list.get(i);
             int j = i - 1;
 
-            while (j >= 0 && list.get(j) > key) {
+            while (j >= 0) {
                 comparisons++;
-                list.set(j + 1, list.get(j));
-                j--;
-                shifts++;
+                if (list.get(j) > key) {
+                    list.set(j + 1, list.get(j));
+                    j--;
+                    shifts++;
+                } else {
+                    break;
+                }
             }
             list.set(j + 1, key);
         }
