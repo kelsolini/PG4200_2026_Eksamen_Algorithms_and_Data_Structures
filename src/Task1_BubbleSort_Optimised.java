@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class Task1_BubbleSort_Optimised {
     public static void main(String[] args) {
@@ -7,15 +8,12 @@ public class Task1_BubbleSort_Optimised {
         /* Original array */
         ArrayList<Wine> wines = ReadFromFile.readFile();
 
-        /* Array only with alcoholValues */
-        ArrayList<Double> alcoholValues = new ArrayList<>();
-
-        /* Looping through original Array and making new one with only alcoholValues */
-        for(Wine wine : wines){
-            if(!alcoholValues.contains(wine.alcohol())) {
-                alcoholValues.add(wine.alcohol());
-            }
+        /* Array only with unique alcoholValues */
+        HashSet<Double> seen = new HashSet<>();
+        for (Wine wine : wines) {
+            seen.add(wine.alcohol());
         }
+        ArrayList<Double> alcoholValues = new ArrayList<>(seen);
 
         System.out.println("=== Bubble Sort (Optimised) ===");
 
@@ -38,11 +36,10 @@ public class Task1_BubbleSort_Optimised {
 
     /**************************************************************************************
      *   SOURCE FOR BUBBLE SORT
-     *   Title   : Bubble Sort Algorithm
-     *   Author  : GeeksForGeeks
-     *   Date    : January 21, 2025
-     *   URL     : https://www.geeksforgeeks.org/bubble-sort-algorithm/
-     *   Accessed: 2025-04-23
+     *   Title   : Bubble Sort
+     *   Author  : Programiz
+     *   URL     : https://www.programiz.com/dsa/bubble-sort
+     *   Accessed: 2026-04-13
      *   Note    : Adapted to sort unique alcohol values from the Wine Quality dataset
      **************************************************************************************/
 

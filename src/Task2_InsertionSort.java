@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class Task2_InsertionSort {
     public static void main(String[] args) {
@@ -7,15 +8,12 @@ public class Task2_InsertionSort {
         /* Original Array */
         ArrayList<Wine> wines = ReadFromFile.readFile();
 
-        /* Array only with alcoholValues */
-        ArrayList<Double> alcoholValues = new ArrayList<>();
-
-        /* Looping through original Array and making new one with only alcoholValues */
-        for(Wine wine : wines){
-            if(!alcoholValues.contains(wine.alcohol())) {
-                alcoholValues.add(wine.alcohol());
-            }
+        /* Array only with unique alcoholValues */
+        HashSet<Double> seen = new HashSet<>();
+        for (Wine wine : wines) {
+            seen.add(wine.alcohol());
         }
+        ArrayList<Double> alcoholValues = new ArrayList<>(seen);
 
         System.out.println("=== Insertion Sort ===");
 
@@ -25,6 +23,7 @@ public class Task2_InsertionSort {
         System.out.println("After:  " + alcoholValues);
         System.out.println("Passes: " + result1[0]);
         System.out.println("Shifts: " + result1[1]);
+        System.out.println("Comparisons: " + result1[2]);
 
         Collections.shuffle(alcoholValues);
 
@@ -34,6 +33,7 @@ public class Task2_InsertionSort {
         System.out.println("After:  " + alcoholValues);
         System.out.println("Passes: " + result2[0]);
         System.out.println("Shifts: " + result2[1]);
+        System.out.println("Comparisons: " + result2[2]);
     }
 
     /**************************************************************************************
@@ -47,6 +47,7 @@ public class Task2_InsertionSort {
     public static int[] insertionSort(ArrayList<Double> list) {
         int passes = 0;
         int shifts = 0;
+        int comparisons = 0;
         int n = list.size();
 
         for (int i = 1; i < n; i++) {
@@ -55,6 +56,7 @@ public class Task2_InsertionSort {
             int j = i - 1;
 
             while (j >= 0 && list.get(j) > key) {
+                comparisons++;
                 list.set(j + 1, list.get(j));
                 j--;
                 shifts++;
@@ -63,7 +65,8 @@ public class Task2_InsertionSort {
         }
         return new int[]{
                 passes,
-                shifts
+                shifts,
+                comparisons
         };
     }
 

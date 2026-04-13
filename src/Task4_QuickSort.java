@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Random;
 
 public class Task4_QuickSort {
@@ -10,15 +11,12 @@ public class Task4_QuickSort {
         /* Original Array */
         ArrayList<Wine> wines = ReadFromFile.readFile();
 
-        /* Array only with alcoholValues */
-        ArrayList<Double> alcoholValues = new ArrayList<>();
-
-        /* Looping through original Array and making new one with only alcoholValues */
-        for(Wine wine : wines){
-            if(!alcoholValues.contains(wine.alcohol())) {
-                alcoholValues.add(wine.alcohol());
-            }
+        /* Array only with unique alcoholValues */
+        HashSet<Double> seen = new HashSet<>();
+        for (Wine wine : wines) {
+            seen.add(wine.alcohol());
         }
+        ArrayList<Double> alcoholValues = new ArrayList<>(seen);
 
         System.out.println("=== Quick Sort ===");
 
